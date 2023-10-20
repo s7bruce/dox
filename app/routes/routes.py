@@ -1,26 +1,33 @@
-from flask import Flask, jsonify, request
-import requests
+from flask import redirect, jsonify, render_template, request
+import pandas as pd
+from app.models import db, onlinefeedback
+from flask import Blueprint
 
+routes_bp = Blueprint(
+    'routes_bp', __name__,
+    template_folder='templates',
+    static_folder='static'
+)
 
 
 # Microsoft Graph API endpoint for retrieving channel messages
 GRAPH_API_ENDPOINT = "https://graph.microsoft.com/v1.0/teams/{team_id}/channels/{channel_id}/messages"
 
 
-@app.route('/get_posts', methods=['GET'])
+@routes_bp.route('/get_posts', methods=['GET'])
 def get_posts():
-    team_id = "<YOUR_TEAM_ID>"
-    channel_id = "<YOUR_CHANNEL_ID>"
+    team_id = '6ef14084-6f86-45c2-a593-ce9d6f460cdf'
+    channel_id = "Contactless%2520Pickup%2520Arrival?"
     access_token = get_access_token()  # Implement this function to retrieve access token
 
     headers = {
-        'Authorization': 'Bearer ' + access_token,
+        'Authorization': 'Bearer ' + 'access_token',
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
 
     # Make a GET request to retrieve messages from the specified channel
-    response = requests.get(GRAPH_API_ENDPOINT.format(team_id=team_id, channel_id=channel_id), headers=headers)
+    response = request.get(GRAPH_API_ENDPOINT.format(team_id=team_id, channel_id=channel_id), headers=headers)
 
     if response.status_code == 200:
         posts = response.json()
@@ -35,6 +42,4 @@ def get_access_token():
     # Return the access token for authentication with Microsoft Graph API
     # Ensure to handle token expiration and refresh logic as needed
     pass
-
-
 
