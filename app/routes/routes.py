@@ -1,7 +1,8 @@
-from flask import redirect, jsonify, render_template, request
+from flask import redirect, jsonify, render_template
 import pandas as pd
 from app.models import db, onlinefeedback
 from flask import Blueprint
+import requests
 
 routes_bp = Blueprint(
     'routes_bp', __name__,
@@ -27,11 +28,11 @@ def get_posts():
     }
 
     # Make a GET request to retrieve messages from the specified channel
-    response = request.get(GRAPH_API_ENDPOINT.format(team_id=team_id, channel_id=channel_id), headers=headers)
+    response = requests.get(GRAPH_API_ENDPOINT.format(team_id=team_id, channel_id=channel_id), headers=headers)
 
     if response.status_code == 200:
         posts = response.json()
-        return jsonify(posts)
+        return jsonify(posts),render_template('getposts.html')
     else:
         return jsonify({'error': 'Failed to retrieve posts'}), response.status_code
 
