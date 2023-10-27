@@ -3,12 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-class onlinefeedback(db.Model):
+class Onlinefeedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Integer)
     customer_name = db.Column(db.String)
-    order_number = db.Column(db.Integer)
-    department = db.Column(db.Integer)
+    customer_email = db.Column(db.String)
+    #order_number = db.Column(db.Integer, nullable=True)
+    #department = db.Column(db.Integer, nullable=True)
     rating = db.Column(db.String)
     feedback = db.Column(db.String)
 
@@ -16,8 +17,9 @@ class onlinefeedback(db.Model):
         return {
             'date': self.date,
             'customer name': self.customer_name,
-            'order number': self.order_number,
-            'department': self.department,
+            'customer email': self.customer_email,
+            #'order number': self.order_number,
+            #'department': self.department,
             'rating': self.rating,
             'feedback': self.feedback
         }

@@ -1,5 +1,5 @@
 from flask import Flask, redirect, jsonify, render_template, request
-from app.models import db, onlinefeedback
+from app.models import db, Onlinefeedback
 from app.routes.routes import routes_bp
 
 
