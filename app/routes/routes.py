@@ -16,9 +16,9 @@ def home():
 @routes_bp.route('/get_posts', methods=['GET'])
 def get_posts():
 
-        return 'test'
+        return render_template('home.html')
 
-@routes_bp.route('/import')
+@routes_bp.route('/settings')
 def import_csv():
     title = 'Import Datasets'
     return render_template('import_csv.html',title=title)
@@ -47,7 +47,7 @@ def parse_csv(file_path):
 
 @routes_bp.route('/home')
 def overview():
-    return 'test'
+    return render_template('home.html')
 
 @routes_bp.route('/reviews')
 def reviews():
