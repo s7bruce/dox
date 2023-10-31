@@ -2,11 +2,38 @@
 
 {% block content %}
 
-</head>
-<body>
-Test
-</body>
-</html>
+
+<div class="row">
+  <div class="col-sm-4 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Recent Reviews (Last 10)</h5>
+        <p class="card-text">Test</p>
+        <a href="/reviews" class="btn btn-primary">All reviews</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Reviews Summary</h5>
+        <p class="card-text">Test #2</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Wordcloud</h5>
+
+          <img id="wordCloud" />
+
+        <a href="#" class="btn btn-primary">Breakdowns</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {% endblock %}

@@ -16,7 +16,7 @@ def home():
 @routes_bp.route('/get_posts', methods=['GET'])
 def get_posts():
 
-        return render_template('home.html')
+        return render_template('getposts.html')
 
 @routes_bp.route('/settings')
 def import_csv():
@@ -53,6 +53,10 @@ def overview():
 def reviews():
     return render_template('reviews.html')
 
+@routes_bp.route('/wordcloud')
+def wordcloud():
+    return render_template('wordcloud.html')
+
 @routes_bp.route('/api/reviews')
 def get_reviews():
     return {'data': [review.to_dict() for review in Onlinefeedback.query]}
@@ -73,7 +77,7 @@ GRAPH_API_ENDPOINT = "https://graph.microsoft.com/v1.0/teams/{team_id}/channels/
 @routes_bp.route('/get_posts_api', methods=['GET'])
 def get_posts_api():
     team_id = '6ef14084-6f86-45c2-a593-ce9d6f460cdf'
-    channel_id = "Contactless%2520Pickup%2520Arrival?"
+    channel_id = "19%3a0efe0fa61d764fa38f0d8c88dca38f15%40thread.tacv2"
     access_token = get_access_token()  # Implement this function to retrieve access token
 
     headers = {
