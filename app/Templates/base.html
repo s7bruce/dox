@@ -37,8 +37,8 @@
       .then(wordCloud => {
         var img = document.getElementById("wordCloud");
         img.src = wordCloud;
-        img.height = 800;
-        img.width = 800;
+        img.height = 600;
+        img.width = 600;
       })
       .catch(err => {
         console.log(err);
@@ -50,7 +50,10 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Reviews Aggregator</a>
+    <a class="navbar-brand" href="#">
+      <img src="{{ url_for('static', filename='googlelogo.png') }}" alt="Logo" width="80" height="24" class="d-inline-block align-text-top">
+        Reviews Aggregator
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -82,9 +85,13 @@
 <!--          </ul>-->
 <!--        </li>-->
       </ul>
-
+            <div class="d-grid gap-2 d-md-block">
+                <a class="btn btn-outline-secondary" href='/' type="button">Last Updated Now</a>
+                <a class="btn btn-primary" href="/get_posts" type="button">Sync</a>
+            </div>
 <!--        <a href="/import" class="button" >Import</a>-->
-            <a href="/get_posts" class="btn btn-primary">Sync</a>
+
+
     </div>
   </div>
 </nav>
