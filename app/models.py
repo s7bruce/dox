@@ -1,4 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.orderinglist import ordering_list
+from sqlalchemy import desc
+
+
 
 db = SQLAlchemy()
 
@@ -13,7 +17,11 @@ class Onlinefeedback(db.Model):
     rating = db.Column(db.String)
     feedback = db.Column(db.String)
 
-    def to_dict(self):
+# onlinefeedback=Onlinefeedback.query.order_by(desc(Onlinefeedback.date))
+
+# stmt = select([users_table]).order_by(users_table.c.name.desc())
+
+def to_dict(self):
         return {
             'date': self.date,
             'customer name': self.customer_name,

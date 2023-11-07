@@ -4,6 +4,7 @@ from app.models import db, Onlinefeedback
 from flask import Blueprint
 import requests
 
+
 routes_bp = Blueprint(
     'routes_bp', __name__,
     template_folder='templates',
@@ -47,6 +48,8 @@ def parse_csv(file_path):
 
 @routes_bp.route('/home')
 def overview():
+    review_table = onlinefeedback
+    print(review_table)
     return render_template('home.html')
 
 @routes_bp.route('/reviews')
