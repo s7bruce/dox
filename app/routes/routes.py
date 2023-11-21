@@ -3,6 +3,7 @@ import pandas as pd
 from app.models import db, Onlinefeedback
 from flask import Blueprint
 import requests
+from sqlalchemy import desc
 
 
 routes_bp = Blueprint(
@@ -12,7 +13,19 @@ routes_bp = Blueprint(
 )
 @routes_bp.route('/')
 def home():
-    return render_template('home.html')
+
+    # Assuming Onlinefeedback is your SQLAlchemy model for the table
+    text_to_clouds = Onlinefeedback.query.order_by(desc(Onlinefeedback.date)).limit(10).all()
+    text = ""
+    for text_to_cloud in text_to_clouds:
+        text = text + " " + str(text_to_cloud.feedback)
+    str(text)
+    ten_reviews =  Onlinefeedback.query.order_by(desc(Onlinefeedback.date)).all()
+    Tex = ""
+    for last_ten_reviews in ten_reviews:
+        Tex = Tex + " " + str(last_ten_reviews)
+    str(Tex)
+    return render_template('home.html', text_to_cloud=text, last_ten=Tex)
 
 @routes_bp.route('/get_posts', methods=['GET'])
 def get_posts():
@@ -48,21 +61,44 @@ def parse_csv(file_path):
 
 @routes_bp.route('/home')
 def overview():
-    review_table = onlinefeedback
-    print(review_table)
     return render_template('home.html')
+
 
 @routes_bp.route('/reviews')
 def reviews():
-    return render_template('reviews.html')
+    text_to_clouds = Onlinefeedback.query.order_by(desc(Onlinefeedback.date)).limit(10).all()
+    text = ""
+    for text_to_cloud in text_to_clouds:
+        text = text + " " + str(text_to_cloud.feedback)
+    str(text)
+    return render_template('reviews.html', text_to_cloud=text)
 
 @routes_bp.route('/wordcloud')
 def wordcloud():
-    return render_template('wordcloud.html')
+    text_to_clouds = Onlinefeedback.query.order_by(desc(Onlinefeedback.date)).limit(10).all()
+    text = ""
+    for text_to_cloud in text_to_clouds:
+        text = text + " " + str(text_to_cloud.feedback)
+    str(text)
+    return render_template('wordcloud.html', text_to_cloud=text)
 
 @routes_bp.route('/api/reviews')
 def get_reviews():
     return {'data': [review.to_dict() for review in Onlinefeedback.query]}
+
+@routes_bp.route('/api/reviews/last10')
+def get_reviews_last10():
+    return {'data': [review.to_dict() for review in Onlinefeedback.query]}
+
+def get_recent_entries():
+    # Query the database to get the most recent 10 entries
+    recent_entries = (
+        session.query(YourModel)
+        .order_by(YourModel.timestamp.desc())
+        .limit(10)
+        .all()
+    )
+    return recent_entries
 
 
 #api implamentation below

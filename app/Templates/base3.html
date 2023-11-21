@@ -10,38 +10,7 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
       <script>
-    fetch("https://textvis-word-cloud-v1.p.rapidapi.com/v1/textToCloud", {
-      method: "POST",
-      headers: {
-        "x-rapidapi-host": "textvis-word-cloud-v1.p.rapidapi.com",
-        "x-rapidapi-key": 'b32b2806e9msh2d7057c3a4f0037p1471a5jsn790f05f48d91',
-        "content-type": "application/json",
-        accept: "application/json"
-      },
-      body: JSON.stringify({
-        text: {{ text_to_cloud | tojson | safe }},
-        scale: 1,
-        width: 800,
-        height: 800,
-        colors: ["#375E97", "#FB6542", "#FFBB00", "#3F681C"],
-        font: "Tahoma",
-        use_stopwords: true,
-        language: "en",
-        uppercase: false
-      })
-    })
-      .then(response => {
-        return response.text();
-      })
-      .then(wordCloud => {
-        var img = document.getElementById("wordCloud");
-        img.src = wordCloud;
-        img.height = 600;
-        img.width = 600;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+
   </script>
 
 

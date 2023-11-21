@@ -1,7 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.orderinglist import ordering_list
 from sqlalchemy import desc
-
+from sqlalchemy import create_engine, Column, DateTime, Integer, MetaData
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime
 
 
 db = SQLAlchemy()
@@ -17,11 +20,7 @@ class Onlinefeedback(db.Model):
     rating = db.Column(db.String)
     feedback = db.Column(db.String)
 
-# onlinefeedback=Onlinefeedback.query.order_by(desc(Onlinefeedback.date))
-
-# stmt = select([users_table]).order_by(users_table.c.name.desc())
-
-def to_dict(self):
+    def to_dict(self):
         return {
             'date': self.date,
             'customer name': self.customer_name,
@@ -31,3 +30,22 @@ def to_dict(self):
             'rating': self.rating,
             'feedback': self.feedback
         }
+
+
+
+
+
+# def get_recent_entries():
+#     # Query the database to get the most recent 10 entries
+#     recent_entries = (
+#         session.query(YourModel)
+#         .order_by(YourModel.timestamp.desc())
+#         .limit(10)
+#         .all()
+#     )
+#     return recent_entries
+
+# Example usage
+# recent_entries = get_recent_entries()
+# for entry in recent_entries:
+#     print(entry.timestamp)

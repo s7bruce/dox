@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Recent Reviews (Last 10)</h5>
-        <p class="card-text">Test</p>
+        <p class="card-text"> {{ last_ten | tojson | safe }} </p>
         <a href="/reviews" class="btn btn-primary">All reviews</a>
       </div>
     </div>
