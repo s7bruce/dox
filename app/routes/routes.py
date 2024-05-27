@@ -4,6 +4,7 @@ from app.models import db, Onlinefeedback
 from flask import Blueprint
 import requests
 from sqlalchemy import desc
+import emoji
 
 
 routes_bp = Blueprint(
@@ -23,8 +24,9 @@ def home():
     ten_reviews =  Onlinefeedback.query.order_by(desc(Onlinefeedback.date)).all()
     Tex = ""
     for last_ten_reviews in ten_reviews:
-        Tex = Tex + " " + str(last_ten_reviews)
+        Tex = Tex + " " + str(last_ten_reviews.feedback)
     str(Tex)
+
     return render_template('home.html', text_to_cloud=text, last_ten=Tex)
 
 @routes_bp.route('/get_posts', methods=['GET'])
@@ -44,7 +46,7 @@ def upload_file():
     if uploaded_file.filename != '':
         uploaded_file.save(uploaded_file.filename)
         parse_csv(uploaded_file.filename)
-    return redirect('/import')
+    return redirect('/settings')
 
 def parse_csv(file_path):
     csv_data = pd.read_csv(file_path)
